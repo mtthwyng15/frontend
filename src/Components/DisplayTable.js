@@ -20,8 +20,6 @@ const Display = () => {
       setJsonData(json);
       setPaginate(_(json).slice(0).take(pageSize).value());
       console.log("jsonData", jsonData);
-      // setFilteredData(json);
-      // let paginate = json;
     };
 
     fetchJSON();
@@ -39,18 +37,6 @@ const Display = () => {
     setPaginate(paginate);
     console.log("paginate", paginate);
   };
-
-  // const handleChange = (e) => {
-  //   // setSearch(e.target.value);
-  //   let value = e.target.value.toLowerCase();
-
-  //   let result = [];
-  //   result = jsonData.filter((data) => {
-  //     return data.order_name.search(value) != -1;
-  //   });
-
-  //   setFilteredData(result);
-  // };
 
   return (
     <div>
@@ -80,29 +66,14 @@ const Display = () => {
           </tr>
         </thead>
         <tbody>
-          {/* {jsonData.filter((filteredData) => {
-            if (search === "") {
-              return filteredData;
-            } else if (
-              (filteredData &&
-                filteredData.toLowerCase &&
-                filteredData.order_name
-                  .toLowerCase()
-                  .includes(search.toLowerCase())) ||
-              (filteredData &&
-                filteredData.toLowerCase &&
-                filteredData.order_customer_id
-                  .toLowerCase()
-                  .includes(search.toLowerCase()))
-            ) {
-              return filteredData;
-            }
-          })} */}
           {jsonData
             .filter((val) => {
               if (search === "") {
                 return val;
-              } else if (val.order_name.includes(search)) {
+              } else if (
+                val.order_name.includes(search) ||
+                val.customer_id.includes(search)
+              ) {
                 return val;
               }
             })
