@@ -8,7 +8,7 @@ const pageSize = 5;
 
 const Display = () => {
   const [jsonData, setJsonData] = useState([]);
-  const [paginate, setPaginate] = useState();
+  const [paginate, setPaginate] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [search, setSearch] = useState("");
 
@@ -18,7 +18,8 @@ const Display = () => {
       let json = await response.json();
       setJsonData(json);
       setPaginate(_(json).slice(0).take(pageSize).value());
-      console.log("jsonData", json);
+      console.log("jsonData", jsonData);
+      // let paginate = json;
     };
 
     fetchJSON();
@@ -67,7 +68,7 @@ const Display = () => {
           </tr>
         </thead>
         <tbody>
-          {/* {jsonData.filter((filteredData) => {
+          {jsonData.filter((filteredData) => {
             if (search === "") {
               return filteredData;
             } else if (
@@ -84,8 +85,8 @@ const Display = () => {
             ) {
               return filteredData;
             }
-          })} */}
-          {jsonData.map((data, index) => (
+          })}
+          {paginate.map((data, index) => (
             <tr key={index}>
               <td>{data.order_name}</td>
               <td>{data.company_id}</td>
