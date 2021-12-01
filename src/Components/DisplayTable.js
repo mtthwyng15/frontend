@@ -1,16 +1,17 @@
-import React from "react";
-import DisplayTable from "./DisplayTable";
-import TotalDeliveryQuantities from "./TotalDeliveryQuantities";
+import React, { useState, useEffect } from "react";
+// import DisplayTable from "./DisplayTable";
+// import TotalDeliveryQuantities from "./TotalDeliveryQuantities";
 import _ from "lodash";
 
 const pageSize = 5;
 
 const Display = () => {
-  const [jsonData, setJsonData] = React.useState([]);
-  const [paginate, setPaginate] = React.useState();
-  const [currentPage, setCurrentPage] = React.useState(1);
+  const [jsonData, setJsonData] = useState([]);
+  const [paginate, setPaginate] = useState();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [search, setSearch] = useState("");
 
-  React.useEffect(() => {
+  useEffect(() => {
     const fetchJSON = async () => {
       const response = await fetch("/order");
       let json = await response.json();
@@ -20,14 +21,6 @@ const Display = () => {
 
     fetchJSON();
   }, []);
-
-  // React.useEffect(() => {
-  //   axios.get("/order").then((res) => {
-  //     console.log(res.data);
-  //     setJsonData(res.data);
-  //     setPaginate(_(res.data).slice(0).take(pageSize).value());
-  //   });
-  // }, []);
 
   const pageCount = jsonData ? Math.ceil(jsonData.length / pageSize) : 0;
   if (pageCount === 1) return null;
@@ -41,10 +34,26 @@ const Display = () => {
     setPaginate(paginated);
   };
 
+  const handleChange = (e) => {
+    setSearch(e.target.value);
+  };
+
   return (
     <div>
-      <table className="table">
-        <thead className="theader">
+      <div>
+        <div className="navy georgia ma0 grow"></div>
+        <div className="pa2">
+          <input
+            className="pa3 bb br3 grow b--none bg-lightest-blue ma3"
+            type="search"
+            placeholder="Search"
+            onChange={handleChange}
+          />
+        </div>
+      </div>
+
+      <table className="table table-bordered">
+        <thead className="thead-dark">
           <tr>
             <th>Order Name</th>
             <th>Customer Company Name</th>
@@ -55,7 +64,25 @@ const Display = () => {
           </tr>
         </thead>
         <tbody>
-          {paginate.map((data, index) => (
+          {jsonData.filter((filteredData) => {
+            if (search === "") {
+              return filteredData;
+            } else if (
+              (filteredData &&
+                filteredData.toLowerCase &&
+                filteredData.order_name
+                  .toLowerCase()
+                  .includes(search.toLowerCase())) ||
+              (filteredData &&
+                filteredData.toLowerCase &&
+                filteredData.order_customer_id
+                  .toLowerCase()
+                  .includes(search.toLowerCase()))
+            ) {
+              return filteredData;
+            }
+          })}
+          {jsonData.map((data, index) => (
             <tr key={index}>
               <td>{data.order_name}</td>
               <td>{data.company_id}</td>
