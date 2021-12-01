@@ -11,6 +11,7 @@ const Display = () => {
   const [paginate, setPaginate] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [search, setSearch] = useState("");
+  const [filteredData, setFilteredData] = useState(jsonData);
 
   useEffect(() => {
     const fetchJSON = async () => {
@@ -19,6 +20,7 @@ const Display = () => {
       setJsonData(json);
       setPaginate(_(json).slice(0).take(pageSize).value());
       console.log("jsonData", jsonData);
+      // setFilteredData(json);
       // let paginate = json;
     };
 
@@ -38,9 +40,17 @@ const Display = () => {
     console.log("paginate", paginate);
   };
 
-  const handleChange = (e) => {
-    setSearch(e.target.value);
-  };
+  // const handleChange = (e) => {
+  //   // setSearch(e.target.value);
+  //   let value = e.target.value.toLowerCase();
+
+  //   let result = [];
+  //   result = jsonData.filter((data) => {
+  //     return data.order_name.search(value) != -1;
+  //   });
+
+  //   setFilteredData(result);
+  // };
 
   return (
     <div>
@@ -51,7 +61,9 @@ const Display = () => {
             className="pa3 bb br3 grow b--none bg-lightest-blue ma3"
             type="search"
             placeholder="Search"
-            onChange={handleChange}
+            onChange={(event) => {
+              setSearch(event.target.value.toLowerCase());
+            }}
           />
         </div>
       </div>
@@ -68,7 +80,7 @@ const Display = () => {
           </tr>
         </thead>
         <tbody>
-          {jsonData.filter((filteredData) => {
+          {/* {jsonData.filter((filteredData) => {
             if (search === "") {
               return filteredData;
             } else if (
@@ -85,21 +97,29 @@ const Display = () => {
             ) {
               return filteredData;
             }
-          })}
-          {paginate.map((data, index) => (
-            <tr key={index}>
-              <td>{data.order_name}</td>
-              <td>{data.company_id}</td>
-              <td>{data.customer_id}</td>
-              <td>{data.created_at}</td>
-              <td>
-                <TotalDeliveryQuantities items={data.OrderItems} />
-              </td>
-              <td>
-                <TotalAmount items={data.OrderItems} />
-              </td>
-            </tr>
-          ))}
+          })} */}
+          {jsonData
+            .filter((val) => {
+              if (search === "") {
+                return val;
+              } else if (val.order_name.includes(search)) {
+                return val;
+              }
+            })
+            .map((data, index) => (
+              <tr key={index}>
+                <td>{data.order_name}</td>
+                <td>{data.company_id}</td>
+                <td>{data.customer_id}</td>
+                <td>{data.created_at}</td>
+                <td>
+                  <TotalDeliveryQuantities items={data.OrderItems} />
+                </td>
+                <td>
+                  <TotalAmount items={data.OrderItems} />
+                </td>
+              </tr>
+            ))}
         </tbody>
       </table>
       <nav className="d-flex justify-content-center">
