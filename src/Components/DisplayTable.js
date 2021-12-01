@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 // import DisplayTable from "./DisplayTable";
-// import TotalDeliveryQuantities from "./TotalDeliveryQuantities";
+import TotalDeliveryQuantities from "./TotalDeliveryQuantities";
 import _ from "lodash";
+import TotalAmount from "./TotalAmount";
 
 const pageSize = 5;
 
@@ -17,6 +18,7 @@ const Display = () => {
       let json = await response.json();
       setJsonData(json);
       setPaginate(_(json).slice(0).take(pageSize).value());
+      console.log("jsonData", json);
     };
 
     fetchJSON();
@@ -31,7 +33,8 @@ const Display = () => {
     setCurrentPage(page);
     const startIndex = (page - 1) * pageSize;
     const paginated = _(jsonData).slice(startIndex).take(pageSize).value();
-    setPaginate(paginated);
+    setPaginate(paginate);
+    console.log("paginate", paginate);
   };
 
   const handleChange = (e) => {
@@ -64,7 +67,7 @@ const Display = () => {
           </tr>
         </thead>
         <tbody>
-          {jsonData.filter((filteredData) => {
+          {/* {jsonData.filter((filteredData) => {
             if (search === "") {
               return filteredData;
             } else if (
@@ -81,19 +84,19 @@ const Display = () => {
             ) {
               return filteredData;
             }
-          })}
+          })} */}
           {jsonData.map((data, index) => (
             <tr key={index}>
               <td>{data.order_name}</td>
               <td>{data.company_id}</td>
               <td>{data.customer_id}</td>
               <td>{data.created_at}</td>
-              {/* <td>
-                  <TotalDeliveryQuantities {...data.OrderItems[0].Deliveries} />
-                </td> */}
-
-              <td>{data.OrderItems[0].Deliveries[0].delivered_quantity}</td>
-              <td>{data.delivered_quantity}</td>
+              <td>
+                <TotalDeliveryQuantities items={data.OrderItems} />
+              </td>
+              <td>
+                <TotalAmount items={data.OrderItems} />
+              </td>
             </tr>
           ))}
         </tbody>

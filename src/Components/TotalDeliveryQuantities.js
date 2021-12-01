@@ -1,14 +1,12 @@
-// import React from "react";
-
 const TotalDeliveryQuantities = (props) => {
-  this.state({
-    quantities: [],
+  let total = 0;
+  props.items.forEach((element) => {
+    element.Deliveries.forEach((delivery) => {
+      console.log(delivery.delivered_quantity);
+      total += delivery.delivered_quantity;
+    });
   });
-
-  const total = this.state.quantities.reduce(
-    (prevValue, currentValue) => prevValue + currentValue
-  );
-
+  console.log(total);
   return total;
 };
 
