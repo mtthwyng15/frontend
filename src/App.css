@@ -43,21 +43,7 @@
   width: 100%;
 }
 
-th,
-td,
-tr {
-  border: 1px solid #ddd;
-  padding: 8px;
-}
-
-.theader {
-  background-color: #61dafb;
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  color: white;
-}
-
-tbody {
-  background-color: gray;
+.search {
+  width: 1500px;
+  margin: 10px;
 }

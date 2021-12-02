@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-// import DisplayTable from "./DisplayTable";
+import DisplayTable from "./DisplayTable";
 import TotalDeliveryQuantities from "./TotalDeliveryQuantities";
 import _ from "lodash";
 import TotalAmount from "./TotalAmount";
@@ -11,7 +11,6 @@ const Display = () => {
   const [paginate, setPaginate] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [search, setSearch] = useState("");
-  const [filteredData, setFilteredData] = useState(jsonData);
 
   useEffect(() => {
     const fetchJSON = async () => {
@@ -19,7 +18,6 @@ const Display = () => {
       let json = await response.json();
       setJsonData(json);
       setPaginate(_(json).slice(0).take(pageSize).value());
-      console.log("jsonData", jsonData);
     };
 
     fetchJSON();
@@ -34,8 +32,7 @@ const Display = () => {
     setCurrentPage(page);
     const startIndex = (page - 1) * pageSize;
     const paginated = _(jsonData).slice(startIndex).take(pageSize).value();
-    setPaginate(paginate);
-    console.log("paginate", paginate);
+    setPaginate(paginated);
   };
 
   return (
@@ -44,7 +41,7 @@ const Display = () => {
         <div className="navy georgia ma0 grow"></div>
         <div className="pa2">
           <input
-            className="pa3 bb br3 grow b--none bg-lightest-blue ma3"
+            // className="pa3 bb br3 grow b--none bg-lightest-blue ma3"
             type="search"
             placeholder="Search"
             onChange={(event) => {
@@ -53,9 +50,8 @@ const Display = () => {
           />
         </div>
       </div>
-
-      <table className="table table-bordered">
-        <thead className="thead-dark">
+      <table className="table">
+        <thead className="theader">
           <tr>
             <th>Order Name</th>
             <th>Customer Company Name</th>
@@ -66,7 +62,7 @@ const Display = () => {
           </tr>
         </thead>
         <tbody>
-          {jsonData
+          {paginate
             .filter((val) => {
               if (search === "") {
                 return val;
