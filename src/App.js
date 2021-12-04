@@ -2,11 +2,12 @@ import React from "react";
 import DisplayTable from "./Components/DisplayTable";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
+import Display2 from "./Components/Display2";
 
 function App() {
   return (
     <div className="App">
-      <DisplayTable />
+      <Display2 />
     </div>
   );
 }
