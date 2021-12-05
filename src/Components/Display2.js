@@ -3,6 +3,7 @@ import TotalDeliveryQuantities from "./TotalDeliveryQuantities";
 import TotalAmount from "./TotalAmount";
 import _ from "lodash";
 import "../App.css";
+import Subtotal from "./Subtotal";
 
 const pageSize = 5;
 
@@ -11,7 +12,6 @@ const Display = () => {
   const [paginate, setPaginate] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [search, setSearch] = useState("");
-  const [sort, setSort] = useState("");
 
   useEffect(() => {
     const fetchJSON = async () => {
@@ -51,6 +51,9 @@ const Display = () => {
         </div>
       </div>
       <div>
+        <div>
+          <Subtotal items={paginate} />
+        </div>
         <table className="table">
           <thead className="theader">
             <tr>
@@ -63,7 +66,7 @@ const Display = () => {
             </tr>
           </thead>
           <tbody>
-            {jsonData
+            {paginate
               .filter((val) => {
                 if (search === "") {
                   return val;
@@ -88,7 +91,7 @@ const Display = () => {
                       <TotalDeliveryQuantities items={data.order_items} />{" "}
                     </td>
                     <td>
-                      <TotalAmount items={data.order_items} />{" "}
+                      <TotalAmount items={data.order_items} />
                     </td>
                   </tr>
                 );

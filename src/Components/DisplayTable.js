@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import DisplayTable from "./DisplayTable";
 import TotalDeliveryQuantities from "./TotalDeliveryQuantities";
 import _ from "lodash";
 import TotalAmount from "./TotalAmount";
 
-const pageSize = 5;
+const pageSize = 1;
 
 const Display = () => {
   const [jsonData, setJsonData] = useState([]);
@@ -80,11 +79,9 @@ const Display = () => {
                 <td>{data.customer_id}</td>
                 <td>{data.created_at}</td>
                 <td>
-                  <TotalDeliveryQuantities items={data.OrderItems} />
+                  {/* <TotalDeliveryQuantities items={data.OrderItems} /> */}
                 </td>
-                <td>
-                  <TotalAmount items={data.OrderItems} />
-                </td>
+                <td>{/* <TotalAmount items={data.OrderItems} /> */}</td>
               </tr>
             ))}
         </tbody>

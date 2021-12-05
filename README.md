@@ -68,3 +68,25 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+- Assumptions
+- NodeJS has been installed
+
+- To start the front end
+- connect the backend server
+
+```bash
+npm start
+```
+
+- To verify
+- localhost:3000/
+- Under the package.json file, check the `proxy` to make sure it matches the back end server under the file name of `app.js` and variable name of `port`
+
+- To do
+- date sorting
+- date filtering
+- compute total amount
+
+- minor bug
+- search filter only filters the current page
