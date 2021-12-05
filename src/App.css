@@ -44,6 +44,21 @@
 }
 
 .search {
-  width: 1500px;
+  width: 500px;
   margin: 10px;
+  text-align: left;
+}
+
+.subtotal {
+  text-align: left;
+  margin: 10px;
+  font-family: "Courier New", Courier, monospace;
+}
+
+.searchinput {
+  margin: 5px;
+}
+
+h5 {
+  font-family: "Courier New", Courier, monospace;
 }

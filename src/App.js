@@ -1,12 +1,12 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import Display2 from "./Components/Display2";
+import Display from "./Components/Display";
 
 function App() {
   return (
     <div className="App">
-      <Display2 />
+      <Display />
     </div>
   );
 }
