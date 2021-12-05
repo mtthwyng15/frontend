@@ -1,12 +1,16 @@
 # Packform1
 
-This is a front end application that displays the records of customers and their orders.
-The reason for splitting this and back end application is because of best practises and for scalability and maintainability.
+This is a frontend application that displays the records of customers and their orders.
+The reason for splitting this and backend application is because of best practises and for scalability and maintainability.
+
+# Pre-requisites
+
+- [NodeJS](https://nodejs.org/en/)
 
 ## Assumptions
 
 - NodeJS has been installed
-- the back end server is up and running on `localhost:4000/`
+- the backend server is up and running on `localhost:4000/`
 
 ## Usage
 
@@ -18,9 +22,9 @@ npm start
 
 - To view the application, use `localhost:3000/` to run on any browser
 
-### Configure back end
+### Configure backend
 
-- Modify the `proxy` value in `package.json` file to match the back end `address` and `port`
+- Modify the `proxy` value in `package.json` file to match the backend `address` and `port`
 
 ## Todo/Known issues
 
