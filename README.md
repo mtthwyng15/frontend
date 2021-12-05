@@ -14,13 +14,14 @@ The reason for splitting this and backend application is because of best practis
 
 ## Usage
 
-- To start the front end
+- To start the frontend
 
 ```bash
+npm install
 npm start
 ```
 
-- To view the application, use `localhost:3000/` to run on any browser
+- Use any browser to access the [application](localhost:3000/)
 
 ### Configure backend
 
